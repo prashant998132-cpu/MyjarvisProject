@@ -1,75 +1,37 @@
 'use client';
-import { useState } from 'react';
 import ChatInterface from "./components/ChatInterface-v4";
 import RelationshipBar from "./components/RelationshipBar-v2";
-import LinkCard from "./components/LinkCard";
-import { tools } from "./lib/links";
+import LinkManager from "./components/LinkManager";
 
 // Main Page
 const HomePage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  
-  // Get unique categories
-  const categories = ["All", ...new Set(tools.map((tool) => tool.category))];
-  
-  // Filter tools by category
-  const filteredTools = selectedCategory === "All" 
-    ? tools
-    : tools.filter((tool) => tool.category === selectedCategory);
-
-  // Category colors for UI
-  const categoryColors = {
-    "Image Generation": "bg-purple-900",
-    "Image Editing": "bg-yellow-900",
-    "Image Upscaling": "bg-orange-900",
-    "Text Generation": "bg-green-900",
-    "Text Editing": "bg-pink-900",
-    "Text to Visual": "bg-indigo-900",
-    "Video Generation": "bg-blue-900",
-    "Music Generation": "bg-red-900",
-    "Voice/TTS": "bg-cyan-900",
-  };
-
   return (
-    <div className="min-h-screen bg-gray-900 p-4">
-      <h1 className="text-3xl font-bold text-center mb-6" style={{ color: "#ff1a88" }}>
-        JARVIS v4.0 🤖
-      </h1>
-      <RelationshipBar level={3} />
-      <ChatInterface />
-      
-      {/* Category Filter */}
-      <div className="mt-6">
-        <h2 className="text-xl font-bold mb-3">AI Tools (140+ Free)</h2>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-3 py-1 rounded-full text-sm font-medium ${
-                selectedCategory === category 
-                  ? 'bg-pink-600 text-white'
-                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-        
-        {/* Tools Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredTools.map((tool) => (
-            <LinkCard
-              key={tool.id}
-              name={tool.name}
-              category={tool.category}
-              url={tool.url}
-              description={tool.description}
-            />
-          ))}
-        </div>
-      </div>
+    <div className="min-h-screen bg-gray-900 text-gray-100 p-4 sm:p-8 font-sans">
+      <header className="max-w-7xl mx-auto mb-12 text-center">
+        <h1 className="text-5xl font-extrabold tracking-tighter mb-4" style={{ color: "#ff1a88", textShadow: "0 0 20px rgba(255, 26, 136, 0.3)" }}>
+          JARVIS v4.0 🤖
+        </h1>
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          Your personal AI tools dashboard. Explore over 140+ free AI resources curated for creators.
+        </p>
+      </header>
+
+      <main className="max-w-7xl mx-auto space-y-12">
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <div className="lg:col-span-1 sticky top-8">
+            <RelationshipBar level={5} />
+            <ChatInterface />
+          </div>
+
+          <div className="lg:col-span-2">
+            <LinkManager />
+          </div>
+        </section>
+      </main>
+
+      <footer className="max-w-7xl mx-auto mt-20 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+        <p>&copy; 2026 JARVIS v4.0. Built for the future of AI interaction.</p>
+      </footer>
     </div>
   );
 };

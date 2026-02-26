@@ -1,9 +1,15 @@
 import './globals.css';
+import React from 'react';
 
-export default function RootLayout({ children }) {
+export const metadata = {
+  title: 'JARVIS v4.0',
+  description: 'AI Tools Platform',
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

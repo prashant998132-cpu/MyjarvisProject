@@ -1,3 +1,4 @@
+'use client';
 import { motion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 
@@ -17,29 +18,38 @@ const bubbleVariants = {
   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } },
 };
 
-// Mobile swipe gestures
-const handlers = useSwipeable({
-  onSwipedLeft: () => openToolsPanel(),
-  onSwipedUp: () => startVoiceInput(),
-});
-
 // Main Chat Interface
 const ChatInterface = () => {
+  const openToolsPanel = () => {
+    console.log("Tools panel opened");
+  };
+
+  const startVoiceInput = () => {
+    console.log("Voice input started");
+  };
+
+  // Mobile swipe gestures
+  const handlers = useSwipeable({
+    onSwipedLeft: () => openToolsPanel(),
+    onSwipedUp: () => startVoiceInput(),
+  });
+
   return (
-    <motion.div
-      {...handlers}
-      style={glassStyle}
-      initial="hidden"
-      animate="visible"
-      className="p-4 m-4"
-    >
-      <motion.div variants={bubbleVariants} className="mb-2">
-        <p>Hello, I'm JARVIS v4.0! 🤖</p>
+    <div {...handlers} className="m-4">
+      <motion.div
+        style={glassStyle}
+        initial="hidden"
+        animate="visible"
+        className="p-4"
+      >
+        <motion.div variants={bubbleVariants} className="mb-2">
+          <p className="font-semibold">Hello, I'm JARVIS v4.0! 🤖</p>
+        </motion.div>
+        <motion.div variants={bubbleVariants} className="mb-2">
+          <p>Swipe left for tools, swipe up for voice! 🎤</p>
+        </motion.div>
       </motion.div>
-      <motion.div variants={bubbleVariants} className="mb-2">
-        <p>Swipe left for tools, swipe up for voice! 🎤</p>
-      </motion.div>
-    </motion.div>
+    </div>
   );
 };
 
