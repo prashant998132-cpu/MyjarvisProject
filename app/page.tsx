@@ -1,7 +1,8 @@
+'use client';
 import { useState } from 'react';
 import ChatInterface from "./components/ChatInterface-v4";
 import RelationshipBar from "./components/RelationshipBar-v2";
-import LinkCard from "./components/ToolCard";
+import LinkCard from "./components/LinkCard";
 import { tools } from "./lib/links";
 
 // Main Page
